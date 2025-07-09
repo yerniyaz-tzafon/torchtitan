@@ -10,7 +10,6 @@
 # --- constraint issues or to tune for improved performance.
 # ---
 
-echo "SLURM script has started on $(hostname) at $(date)"
 
 #SBATCH --job-name=torchtitan_multi_node
 
@@ -29,6 +28,8 @@ echo "SLURM script has started on $(hostname) at $(date)"
 #SBATCH --wait-all-nodes=1
 
 #SBATCH --nodelist=g356,g364
+
+echo "SLURM script has started on $(hostname) at $(date)"
 
 export PYTHONPATH=$PYTHONPATH:/home/ubuntu/git/torchtitan
 
