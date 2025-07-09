@@ -51,7 +51,7 @@ export NCCL_NET=IB
 export NCCL_DEBUG=WARN
 export PYTHONFAULTHANDLER=1
 # optional debug settings
-export NCCL_DEBUG=INFO
+export NCCL_DEBUG=TRACE
 NCCL_DEBUG_SUBSYS=INIT,GRAPH,ENV
 
 export LD_LIBRARY_PATH=/opt/amazon/efa/lib:$LD_LIBRARY_PATH
