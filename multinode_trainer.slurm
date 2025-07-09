@@ -26,6 +26,10 @@ echo "SLURM script has started on $(hostname) at $(date)"
 
 #SBATCH --output=logs/slurm-%j.out
 
+#SBATCH --wait-all-nodes=1
+
+#SBATCH --nodelist=g356,g364
+
 export PYTHONPATH=$PYTHONPATH:/home/ubuntu/git/torchtitan
 
 nodes=( $( scontrol show hostnames $SLURM_JOB_NODELIST ) )
