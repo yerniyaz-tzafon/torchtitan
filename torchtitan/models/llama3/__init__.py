@@ -55,7 +55,7 @@ llama3_configs = {
         ffn_dim_multiplier=1.0,
         multiple_of=1024,
         rope_theta=500000,
-    )
+    ),
     "8B": TransformerModelArgs(
         dim=4096,
         n_layers=32,
