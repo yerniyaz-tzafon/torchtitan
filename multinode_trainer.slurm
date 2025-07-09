@@ -43,8 +43,8 @@ export LOGLEVEL=INFO
 # Enable for A100
 export FI_PROVIDER="efa"
 # Ensure that P2P is available
-# export NCCL_P2P_DISABLE=1
-# export NCCL_IB_DISABLE=1
+export NCCL_P2P_DISABLE=0
+export NCCL_IB_DISABLE=0
 
 # debugging flags (optional)
 export NCCL_DEBUG=WARN
@@ -60,7 +60,8 @@ export CUDA_LAUNCH_BLOCKING=0
 # on your cluster you might need these:
 # set the network interface
 export NCCL_SOCKET_IFNAME="eth0,en,eth,em,bond"
-export NCCL_BUFFSIZE=2097152
+# export NCCL_BUFFSIZE=2097152
+export NCCL_BUFFSIZE=4194304
 #export TORCH_DIST_INIT_BARRIER=1
 export FI_EFA_SET_CUDA_SYNC_MEMOPS=0
 
