@@ -10,6 +10,8 @@
 # --- constraint issues or to tune for improved performance.
 # ---
 
+echo "SLURM script has started on $(hostname) at $(date)"
+
 #SBATCH --job-name=torchtitan_multi_node
 
 #SBATCH --ntasks=2
