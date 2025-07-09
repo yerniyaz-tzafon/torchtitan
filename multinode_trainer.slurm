@@ -41,7 +41,7 @@ head_node_ip=$(srun --nodes=1 --ntasks=1 -w "$head_node" hostname --ip-address)
 echo Node IP: $head_node_ip
 export LOGLEVEL=INFO
 # Enable for A100
-# export FI_PROVIDER="efa"
+export FI_PROVIDER="efa"
 # Ensure that P2P is available
 # export NCCL_P2P_DISABLE=1
 export NCCL_IB_DISABLE=0
