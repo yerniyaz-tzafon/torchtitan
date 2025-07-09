@@ -16,7 +16,7 @@ save_tb_folder = "tb"
 name = "llama3"
 flavor = "3B"
 tokenizer_path = "./assets/tokenizer/Meta-Llama-3-8B/original/tokenizer.model"
-converters = ["float8"]
+# converters = ["float8"]
 
 [optimizer]
 name = "AdamW"
