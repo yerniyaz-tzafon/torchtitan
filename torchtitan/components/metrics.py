@@ -363,6 +363,9 @@ class MetricsProcessor:
         tps = self.ntokens_since_last_log / (
             time_delta * self.parallel_dims.non_data_parallel_size
         )
+        global_tps = self.ntokens_since_last_log * self.parallel_dims.world_size / (
+            time_delta * self.parallel_dims.non_data_parallel_size
+        )
         # model FLOPS utilization
         # For its definition and calculation, please refer to the PaLM paper:
         # https://arxiv.org/abs/2204.02311
@@ -407,7 +410,9 @@ class MetricsProcessor:
             f"({device_mem_stats.max_reserved_pct:.2f}%)  "
             f"{color.blue}tps: {round(tps):,}  "
             f"{color.cyan}tflops: {tflops:,.2f}  "
-            f"{color.magenta}mfu: {mfu:.2f}%{color.reset}"
+            f"{color.magenta}mfu: {mfu:.2f} "
+            f"{color.red}ntokens: {self.ntokens_since_last_log:,} "
+            f"{color.green}global_tps: {round(global_tps):,} {color.reset}"
         )
 
         self.ntokens_since_last_log = 0

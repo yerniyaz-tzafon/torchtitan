@@ -39,6 +39,23 @@ llama3_configs = {
         use_flex_attn=True,
         attn_mask_type="block_causal",
     ),
+    "tiny": TransformerModelArgs(
+        dim=2048,
+        n_layers=28,
+        n_heads=16,
+        n_kv_heads=2,
+        ffn_dim_multiplier=2.0,
+        rope_theta=10000,
+    ),
+    "3B": TransformerModelArgs(
+        dim=3072,
+        n_layers=28,
+        n_heads=24,
+        n_kv_heads=8,
+        ffn_dim_multiplier=1.0,
+        multiple_of=1024,
+        rope_theta=500000,
+    )
     "8B": TransformerModelArgs(
         dim=4096,
         n_layers=32,
