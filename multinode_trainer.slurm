@@ -41,7 +41,7 @@ head_node_ip=$(srun --nodes=1 --ntasks=1 -w "$head_node" hostname --ip-address)
 echo Node IP: $head_node_ip
 export LOGLEVEL=INFO
 # Enable for A100
-export FI_PROVIDER="efa"
+# export FI_PROVIDER="efa"
 # Ensure that P2P is available
 # export NCCL_P2P_DISABLE=1
 export NCCL_IB_DISABLE=0
@@ -62,12 +62,12 @@ export CUDA_LAUNCH_BLOCKING=0
 
 # on your cluster you might need these:
 # set the network interface
-export NCCL_SOCKET_IFNAME="eth0,en,eth,em,bond"
+# export NCCL_SOCKET_IFNAME="eth0,en,eth,em,bond"
 # export NCCL_SOCKET_IFNAME="eth0,en,eth,em,bond,bond0"
 # export NCCL_IB_HCA=mlx5_0:1
 export NCCL_BUFFSIZE=2097152
 #export TORCH_DIST_INIT_BARRIER=1
-export FI_EFA_SET_CUDA_SYNC_MEMOPS=0
+# export FI_EFA_SET_CUDA_SYNC_MEMOPS=0
 
 CONFIG_FILE=${CONFIG_FILE:-"./torchtitan/models/llama3/train_configs/llama3_3b.toml"}
 
