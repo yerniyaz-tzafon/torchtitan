@@ -20,7 +20,7 @@
 
 #SBATCH --cpus-per-task=96
 
-#SBATCH --partition=train
+#SBATCH --partition=gpu
 
 
 nodes=( $( scontrol show hostnames $SLURM_JOB_NODELIST ) )
