@@ -54,14 +54,17 @@ export PYTHONFAULTHANDLER=1
 export NCCL_DEBUG=TRACE
 NCCL_DEBUG_SUBSYS=INIT,GRAPH,ENV
 
-export LD_LIBRARY_PATH=/opt/amazon/efa/lib:$LD_LIBRARY_PATH
-export LD_LIBRARY_PATH=/usr/local/lib/:$LD_LIBRARY_PATH
+# export LD_LIBRARY_PATH=/opt/amazon/efa/lib:$LD_LIBRARY_PATH
+# export LD_LIBRARY_PATH=/usr/local/lib/:$LD_LIBRARY_PATH
+export CUDA_HOME=/usr/local/cuda-12.6
+export LD_LIBRARY_PATH=/usr/local/cuda-12.6/lib64:$LD_LIBRARY_PATH
 export CUDA_LAUNCH_BLOCKING=0
 
 # on your cluster you might need these:
 # set the network interface
-export NCCL_SOCKET_IFNAME="eth0,en,eth,em,bond,bond0"
-export NCCL_IB_HCA=mlx5_0:1
+export NCCL_SOCKET_IFNAME="eth0,en,eth,em,bond"
+# export NCCL_SOCKET_IFNAME="eth0,en,eth,em,bond,bond0"
+# export NCCL_IB_HCA=mlx5_0:1
 export NCCL_BUFFSIZE=2097152
 #export TORCH_DIST_INIT_BARRIER=1
 export FI_EFA_SET_CUDA_SYNC_MEMOPS=0
