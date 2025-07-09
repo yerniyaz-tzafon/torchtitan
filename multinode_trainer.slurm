@@ -22,6 +22,8 @@
 
 #SBATCH --partition=gpu
 
+#SBATCH --output=logs/slurm-%j.out
+
 
 nodes=( $( scontrol show hostnames $SLURM_JOB_NODELIST ) )
 nodes_array=($nodes)
