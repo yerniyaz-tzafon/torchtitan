@@ -65,7 +65,7 @@ export CUDA_LAUNCH_BLOCKING=0
 # on your cluster you might need these:
 # set the network interface
 # export NCCL_SOCKET_IFNAME="eth0,en,eth,em,bond"
-export NCCL_SOCKET_IFNAME="enp157s0f0np0"
+export NCCL_SOCKET_IFNAME="ib0@ibp26s0"
 # export NCCL_SOCKET_IFNAME="eth0,en,eth,em,bond,bond0"
 # export NCCL_SOCKET_IFNAME=enp157s0f0np0
 # export NCCL_IB_HCA=mlx5_0:1,mlx5_1:1,mlx5_2:1,mlx5_3:1,mlx5_4:1,mlx5_5:1,mlx5_6:1,mlx5_7:1
