@@ -17,7 +17,7 @@
 
 #SBATCH --nodes=2
 
-#SBATCH --gpus-per-task=8
+#SBATCH --gpus-per-task=1
 
 #SBATCH --cpus-per-task=96
 
@@ -58,9 +58,9 @@ export NCCL_DEBUG_SUBSYS=INIT,GRAPH,ENV
 
 # export LD_LIBRARY_PATH=/opt/amazon/efa/lib:$LD_LIBRARY_PATH
 # export LD_LIBRARY_PATH=/usr/local/lib/:$LD_LIBRARY_PATH
-export CUDA_HOME=/usr/local/cuda-12.6
-export LD_LIBRARY_PATH=/usr/local/cuda-12.6/lib64:$LD_LIBRARY_PATH
-export CUDA_LAUNCH_BLOCKING=0
+# export CUDA_HOME=/usr/local/cuda-12.6
+# export LD_LIBRARY_PATH=/usr/local/cuda-12.6/lib64:$LD_LIBRARY_PATH
+# export CUDA_LAUNCH_BLOCKING=0
 
 # on your cluster you might need these:
 # set the network interface
@@ -84,5 +84,5 @@ CONFIG_FILE=${CONFIG_FILE:-"./torchtitan/models/llama3/train_configs/llama3_3b.t
 # dcgmi profile --pause
 # adjust sbatch --ntasks and sbatch --nodes above and --nnodes below
 # to your specific node count, and update target launch file.
-srun torchrun --nnodes 2 --nproc_per_node 8 --rdzv_id 101 --rdzv_backend c10d --rdzv_endpoint "$head_node_ip:29500" ./torchtitan/train.py --job.config_file ${CONFIG_FILE}
+srun torchrun --nnodes 2 --nproc_per_node 1 --rdzv_id 101 --rdzv_backend c10d --rdzv_endpoint "$head_node_ip:29500" ./torchtitan/train.py --job.config_file ${CONFIG_FILE}
 # dcgmi profile --resume
