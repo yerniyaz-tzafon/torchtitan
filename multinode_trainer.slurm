@@ -43,10 +43,10 @@ export LOGLEVEL=INFO
 # Enable for A100
 # export FI_PROVIDER="efa"
 # Ensure that P2P is available
-# export NCCL_P2P_DISABLE=1
+export NCCL_P2P_DISABLE=1
 export NCCL_IB_DISABLE=0
 export NCCL_NET=IB
-export NCCL_NET_GDR_LEVEL=0
+# export NCCL_NET_GDR_LEVEL=0
 
 # debugging flags (optional)
 export PYTHONFAULTHANDLER=1
