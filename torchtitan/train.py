@@ -417,70 +417,51 @@ class Trainer(torch.distributed.checkpoint.stateful.Stateful):
     def train_step(
         self, data_iterator: Iterable[tuple[dict[str, torch.Tensor], torch.Tensor]]
     ):
-        print("train_step step: ", 1)
         self.optimizers.zero_grad()
-        print("train_step step: ", 2)
 
         # Keep these variables local to shorten the code as these are
         # the major variables that are used in the training loop.
         parallel_dims = self.parallel_dims
-        print("train_step step: ", 3)
+
         accumulated_losses = []
-        print("train_step step: ", 4)
         # If data runs out during gradient accumulation, that
         # entire step will not be executed.
         for microbatch in range(self.gradient_accumulation_steps):
-            print("train_step step: ", 5)
             input_dict, labels = next(data_iterator)
-            print("train_step step: ", 6)
             loss = self.forward_backward_step(input_dict, labels)
-            print("train_step step: ", 7)
             accumulated_losses.append(loss.detach())
-            print("train_step step: ", 8)
-        print("train_step step: ", 9)
+
         grad_norm = dist_utils.clip_grad_norm_(
             [p for m in self.model_parts for p in m.parameters()],
             self.job_config.training.max_norm,
             foreach=True,
             pp_mesh=self.world_mesh["pp"] if parallel_dims.pp_enabled else None,
         )
-        print("train_step step: ", 10)
         self.checkpointer.maybe_wait_for_staging()
-        print("train_step step: ", 11)
         self.optimizers.step()
-        print("train_step step: ", 12)
         self.lr_schedulers.step()
-        print("train_step step: ", 13)
 
         # Reduce the data collected over gradient accumulation steps.
         loss = torch.sum(torch.stack(accumulated_losses))
-        print("train_step step: ", 14)
+
         # log metrics
         if not self.metrics_processor.should_log(self.step):
-            print("train_step step: ", 15)
             return
-        print("train_step step: ", 16)
+
         if parallel_dims.dp_cp_enabled or self.ft_manager.enabled:
-            print("train_step step: ", 17)
             loss = loss.detach()
-            print("train_step step: ", 18)
             # Skip ft manager communication when using semi sync training
             use_ft_pg = (
                 self.ft_manager.enabled
                 and self.job_config.fault_tolerance.semi_sync_method is None
             )
-            print("train_step step: ", 19)
             ft_pg = self.ft_manager.replicate_pg if use_ft_pg else None
-            print("train_step step: ", 20)
             global_avg_loss, global_max_loss = (
                 dist_utils.dist_mean(loss, self.world_mesh["dp_cp"], ft_pg),
                 dist_utils.dist_max(loss, self.world_mesh["dp_cp"], ft_pg),
             )
-            print("train_step step: ", 21)
         else:
-            print("train_step step: ", 22)
             global_avg_loss = global_max_loss = loss.detach().item()
-            print("train_step step: ", 23)
 
         self.metrics_processor.log(
             self.step,
@@ -488,14 +469,14 @@ class Trainer(torch.distributed.checkpoint.stateful.Stateful):
             global_max_loss,
             grad_norm.item(),
         )
-        print("train_step step: ", 24)
+
     @record
     def train(self):
         job_config = self.job_config
 
         self.checkpointer.load(step=job_config.checkpoint.load_step)
         logger.info(f"Training starts at step {self.step + 1}.")
-        print("main train step: ", 1)
+
         with (
             maybe_enable_profiling(job_config, global_step=self.step) as torch_profiler,
             maybe_enable_memory_snapshot(
@@ -508,27 +489,19 @@ class Trainer(torch.distributed.checkpoint.stateful.Stateful):
                 optimizer=self.optimizers,
             ),
         ):
-            print("main train step: ", 2)
             data_iterator = self.batch_generator(self.dataloader)
-            print("main train step: ", 3)
             while self.step < job_config.training.steps:
-                print("main train step: ", 4)
                 self.step += 1
-                print("main train step: ", 5)
                 self.gc_handler.run(self.step)
-                print("main train step: ", 6)
                 try:
                     self.train_step(data_iterator)
-                    print("main train step: ", 7)
                 except DataloaderStopIteration:
-                    print("main train step: ", 8)
                     logger.warning("Ran out of data; last step was canceled.")
                     break
-                print("main train step: ", 9)
                 self.checkpointer.save(
                     self.step, last_step=(self.step == job_config.training.steps)
                 )
-                print("main train step: ", 10)
+
                 # signal the profiler that the next profiling step has started
                 if torch_profiler:
                     torch_profiler.step()
