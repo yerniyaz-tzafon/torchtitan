@@ -44,8 +44,8 @@ export LOGLEVEL=INFO
 # export FI_PROVIDER="efa"
 # Ensure that P2P is available
 # export NCCL_P2P_DISABLE=1
-export NCCL_IB_DISABLE=0
-export NCCL_NET=IB
+export NCCL_IB_DISABLE=1
+# export NCCL_NET=IB
 
 # debugging flags (optional)
 export NCCL_DEBUG=WARN
