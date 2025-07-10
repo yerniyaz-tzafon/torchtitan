@@ -66,7 +66,7 @@ export CUDA_LAUNCH_BLOCKING=0
 # set the network interface
 # export NCCL_SOCKET_IFNAME="eth0,en,eth,em,bond"
 # export NCCL_SOCKET_IFNAME="eth0,en,eth,em,bond,bond0"
-export NCCL_SOCKET_IFNAME=enp157s0f0np0
+# export NCCL_SOCKET_IFNAME=enp157s0f0np0
 # export NCCL_IB_HCA=mlx5_0:1,mlx5_1:1,mlx5_2:1,mlx5_3:1,mlx5_4:1,mlx5_5:1,mlx5_6:1,mlx5_7:1
 export NCCL_IB_HCA=mlx5_0,mlx5_3,mlx5_4,mlx5_5,mlx5_6,mlx5_9,mlx5_10,mlx5_11
 export NCCL_BUFFSIZE=2097152
