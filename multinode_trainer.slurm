@@ -40,18 +40,18 @@ head_node_ip=$(srun --nodes=1 --ntasks=1 -w "$head_node" hostname --ip-address)
 
 echo Node IP: $head_node_ip
 export LOGLEVEL=INFO
-# Enable for A100
-# export FI_PROVIDER="efa"
-# Ensure that P2P is available
-# export NCCL_P2P_DISABLE=1
-export NCCL_IB_DISABLE=0
-# export NCCL_NET=IB
-export NCCL_NET_GDR_LEVEL=1
+# # Enable for A100
+# # export FI_PROVIDER="efa"
+# # Ensure that P2P is available
+# # export NCCL_P2P_DISABLE=1
+# export NCCL_IB_DISABLE=0
+# # export NCCL_NET=IB
+# export NCCL_NET_GDR_LEVEL=0 
 
 # debugging flags (optional)
 export PYTHONFAULTHANDLER=1
 # optional debug settings
-export NCCL_DEBUG=INFO
+# export NCCL_DEBUG=INFO
 export TORCH_DISTRIBUTED_DEBUG=DETAIL
 # export NCCL_DEBUG_SUBSYS=INIT,GRAPH,ENV
 
@@ -64,6 +64,8 @@ export TORCH_DISTRIBUTED_DEBUG=DETAIL
 # export CUDA_LAUNCH_BLOCKING=0
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda/libnvvp:/usr/local/lib
 
+export CUDA_DEVICE_MAX_CONNECTIONS=1
+
 # on your cluster you might need these:
 # set the network interface
 # export NCCL_SOCKET_IFNAME="eth0,en,eth,em,bond"
@@ -75,10 +77,10 @@ export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda/libnvvp:/usr/local/
 
 # export UCX_NET_DEVICES=mlx5_0:1,mlx5_3:1,mlx5_4:1,mlx5_5:1,mlx5_6:1,mlx5_9:1,mlx5_10:1,mlx5_11:1
 
-export NCCL_IB_HCA=mlx5_0:1,mlx5_3:1,mlx5_4:1,mlx5_5:1,mlx5_6:1,mlx5_9:1,mlx5_10:1,mlx5_11:1
+# export NCCL_IB_HCA=mlx5_0:1,mlx5_3:1,mlx5_4:1,mlx5_5:1,mlx5_6:1,mlx5_9:1,mlx5_10:1,mlx5_11:1
 
-export SHARP_COLL_ENABLE_PCI_RELAXED_ORDERING=1
-export NCCL_COLLNET_ENABLE=0
+# export SHARP_COLL_ENABLE_PCI_RELAXED_ORDERING=1
+# export NCCL_COLLNET_ENABLE=0
 
 # export NCCL_BUFFSIZE=2097152
 #export TORCH_DIST_INIT_BARRIER=1
