@@ -44,15 +44,15 @@ export LOGLEVEL=INFO
 # export FI_PROVIDER="efa"
 # Ensure that P2P is available
 # export NCCL_P2P_DISABLE=1
-export NCCL_IB_DISABLE=0
-export NCCL_NET=IB
+# export NCCL_IB_DISABLE=0
+# export NCCL_NET=IB
 
 # debugging flags (optional)
 export NCCL_DEBUG=WARN
 export PYTHONFAULTHANDLER=1
 # optional debug settings
 export NCCL_DEBUG=INFO
-NCCL_DEBUG_SUBSYS=INIT,GRAPH,ENV
+export NCCL_DEBUG_SUBSYS=INIT,GRAPH,ENV
 
 # export NCCL_NET_GDR_LEVEL=2
 
@@ -64,7 +64,7 @@ export CUDA_LAUNCH_BLOCKING=0
 
 # on your cluster you might need these:
 # set the network interface
-export NCCL_SOCKET_IFNAME="eth0,en,eth,em,bond"
+# export NCCL_SOCKET_IFNAME="eth0,en,eth,em,bond"
 # export NCCL_SOCKET_IFNAME="ib0@ibp26s0"
 # export NCCL_SOCKET_IFNAME="eth0,en,eth,em,bond,bond0"
 # export NCCL_SOCKET_IFNAME=enp157s0f0np0
