@@ -69,9 +69,13 @@ export NCCL_DEBUG_SUBSYS=INIT,GRAPH,ENV
 # export NCCL_SOCKET_IFNAME="eth0,en,eth,em,bond,bond0"
 # export NCCL_SOCKET_IFNAME=enp157s0f0np0
 # export NCCL_IB_HCA=mlx5_0:1,mlx5_1:1,mlx5_2:1,mlx5_3:1,mlx5_4:1,mlx5_5:1,mlx5_6:1,mlx5_7:1
-export NCCL_IB_HCA=mlx5
+# export NCCL_IB_HCA=mlx5
 
-export UCX_NET_DEVICES=mlx5_0:1,mlx5_3:1,mlx5_4:1,mlx5_5:1,mlx5_6:1,mlx5_9:1,mlx5_10:1,mlx5_11:1
+# export UCX_NET_DEVICES=mlx5_0:1,mlx5_3:1,mlx5_4:1,mlx5_5:1,mlx5_6:1,mlx5_9:1,mlx5_10:1,mlx5_11:1
+
+export NCCL_IB_HCA=mlx5_0:1,mlx5_3:1,mlx5_4:1,mlx5_5:1,mlx5_6:1,mlx5_9:1,mlx5_10:1,mlx5_11:1
+export NCCL_IB_ROCE_ENABLE=0
+
 export SHARP_COLL_ENABLE_PCI_RELAXED_ORDERING=1
 export NCCL_COLLNET_ENABLE=0
 
