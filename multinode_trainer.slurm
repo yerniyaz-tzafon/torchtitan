@@ -19,7 +19,7 @@
 
 #SBATCH --gpus-per-task=8
 
-#SBATCH --cpus-per-task=96
+#SBATCH --cpus-per-task=104
 
 #SBATCH --partition=gpu
 
